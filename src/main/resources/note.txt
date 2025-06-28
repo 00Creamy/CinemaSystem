@@ -1,0 +1,24 @@
+Use PBKDF2 for password encryption
+Rate Limit by IP address
+Temporary lockout by username
+Global request throttling (optional)
+
+Use a session version token:
+When a session version token mismatched with the database, that means the user is logged out of all devices
+
+On the topic of password reset/password change:
+Link sent to email
+
+On the topic of email changes:
+Input password
+Verify new email
+Notify old email with revert links for 3 days
+Prevent email changes for 3 days
+Customer support available(Only changing to previous emails, if provided with enough information perhaps can new email as well but other than telephone number that's hard)
+Log these changes to database
+
+User has 4 levels:
+Customer
+Staff
+Manager
+Admin
