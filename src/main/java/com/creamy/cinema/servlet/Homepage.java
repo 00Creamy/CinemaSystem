@@ -12,10 +12,14 @@ public class Homepage extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = authorizeUser(request, response);
+            User user = getUserFromSession(request, response);
             if (user != null) {
-                forward(request, response);
+                if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
+                    forward(request, response, "/WEB-INF/Dashboard.jsp");
+                    return;
+                }
             }
+            forward(request, response);
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(),  e.getMessage(), "Login");
         }

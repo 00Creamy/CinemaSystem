@@ -37,7 +37,7 @@
                     <td><%=user1.getEmail()%></td>
                     <td><%=user1.getPhoneNo()%></td>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td>" + user1.getAccessLevel().getName() + "</td>" : ""%>
-                    <%=(user.getAccessLevel().getLevel() >= 2 && (user.getAccessLevel().getLevel() > user1.getAccessLevel().getLevel() || user.getUserId() == user1.getUserId()) ? "<td><a href='./UpdateUser?id=" + user1.getUserId() + "'>Update</a></td>" : ""%>
+                    <%=(user.getAccessLevel().getLevel() >= 2 && (user.getAccessLevel().getLevel() > user1.getAccessLevel().getLevel() || user.getUserId() == user1.getUserId())) ? "<td><a href='./UpdateUser?id=" + user1.getUserId() + "'>Update</a></td>" : ""%>
                     <%=(user.getAccessLevel().getLevel() >= 2 && user.getAccessLevel().getLevel() > user1.getAccessLevel().getLevel()) ? "<td><a href='./DeleteUser?id=" + user1.getUserId() + "'>Delete</a></td>" : ""%>
                 </tr>
                 <%

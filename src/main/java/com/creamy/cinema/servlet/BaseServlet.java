@@ -60,12 +60,23 @@ public class BaseServlet extends HttpServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.invalidate();
-                response.sendRedirect("Login");
+                response.sendRedirect(".");
             }
         } else {
-            response.sendRedirect("Login");
+            response.sendRedirect(".");
         }
         return null;
+    }
+
+    public boolean verifyUser(HttpServletRequest request, User user) throws CinemaException {
+        User fromDatabase = UserDAO.requestUserByUserId(connection, user.getUserId());
+        if (fromDatabase.getSessionVersion() == user.getSessionVersion()) {
+            return true;
+        } else {
+            HttpSession session = request.getSession();
+            session.invalidate();
+            return false;
+        }
     }
 
     public User getUserFromSession(HttpServletRequest request, HttpServletResponse response) {
@@ -78,6 +89,24 @@ public class BaseServlet extends HttpServlet {
                 + "alert(\"" + message + "\");"
                 + "window.location.href='" + location + "';"
                 + "</script>");
+    }
+
+    public void forward(HttpServletRequest request, HttpServletResponse response, String path) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+        dispatcher.forward(request, response);
+    }
+
+    public boolean isStringValid(String... strings) {
+        for (String string: strings) {
+            if (string != null) {
+                if (string.isBlank()) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

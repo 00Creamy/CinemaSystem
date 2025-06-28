@@ -156,7 +156,7 @@ public class UserDAO {
             byte[] salt = generateSalt();
             byte[] hashedPassword = hashPassword(user.getPassword(), salt);
 
-            PreparedStatement statement = connection.prepareStatement("UPDATE user SET password=?, salt=?, WHERE user_id=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE user SET password=?, salt=? WHERE user_id=?");
             statement.setBytes(1, hashedPassword);
             statement.setBytes(2, salt);
             statement.setInt(3, user.getUserId());

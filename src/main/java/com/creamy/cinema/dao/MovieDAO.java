@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class MovieDAO {
     public static void createMovie(DBConnection connection, Movie movie) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO movie (name, rows, seat_per_row) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO movie (title, description, duration, imagePath, ) VALUES (?, ?, ?)");
         } catch (SQLException e) {
             throw new CinemaException("Error when trying to create hall.", e);
         }
