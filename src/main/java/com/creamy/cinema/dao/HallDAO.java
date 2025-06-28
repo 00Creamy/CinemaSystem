@@ -19,8 +19,6 @@ public class HallDAO {
             statement.setInt(2, hall.getRows());
             statement.setInt(3, hall.getSeatPerRow());
 
-
-
             int hallId = connection.executeInsertStatement(statement);
             hall.setHallId(hallId);
         } catch (SQLException e) {

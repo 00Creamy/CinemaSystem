@@ -24,8 +24,12 @@
         <servlet-class>com.creamy.cinema.servlet.UsersCreate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UsersDelete</servlet-name>
+        <servlet-name>UsersUpdate</servlet-name>
         <servlet-class>com.creamy.cinema.servlet.UsersUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsersDelete</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.UsersDelete</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
