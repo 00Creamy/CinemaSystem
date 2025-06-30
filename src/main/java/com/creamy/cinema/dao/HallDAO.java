@@ -13,7 +13,7 @@ import java.util.List;
 public class HallDAO {
     public static void createHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, type, rows, seat_per_row) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, type, hall_rows, seat_per_row) VALUES (?, ?, ?)");
 
             statement.setString(1, hall.getHallName());
             statement.setString(2, hall.getHallType());
@@ -59,7 +59,7 @@ public class HallDAO {
 
     public static boolean updateHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE hall SET name=?, type=?, rows=?, seat_per_row=?, deleted=? WHERE hall_id=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE hall SET name=?, type=?, hall_rows=?, seat_per_row=?, deleted=? WHERE hall_id=?");
             statement.setString(1, hall.getHallName());
             statement.setString(2, hall.getHallType());
             statement.setInt(3, hall.getRows());
@@ -78,7 +78,7 @@ public class HallDAO {
         hall.setHallId(resultSet.getInt("hall_id"));
         hall.setHallName(resultSet.getString("name"));
         hall.setHallType(resultSet.getString("type"));
-        hall.setRows(resultSet.getInt("rows"));
+        hall.setRows(resultSet.getInt("hall_rows"));
         hall.setSeatPerRow(resultSet.getInt("seat_per_row"));
         hall.setDeleted(resultSet.getBoolean("deleted"));
         return hall;
