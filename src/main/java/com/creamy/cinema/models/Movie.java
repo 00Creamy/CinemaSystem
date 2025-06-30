@@ -1,9 +1,11 @@
 package com.creamy.cinema.models;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
-    enum MovieStatus {
+    public enum MovieStatus {
         COMING_SOON(0, "Coming Soon"),
         AIRING(1, "Airing"),
         ARCHIVED(2, "Archived");
@@ -22,21 +24,36 @@ public class Movie {
         public String getName() {
             return name;
         }
+
+        public static MovieStatus getStatusFromLevel(int level) {
+            return switch (level) {
+                case 0 -> COMING_SOON;
+                case 1 -> AIRING;
+                case 2 -> ARCHIVED;
+                default -> null;
+            };
+        }
     }
 
     private int movieId;
     private String title;
     private String description;
-    private int duration;
+    private Duration duration;
     private String imagePath;
-    private List<Tag> tags;
+    private List<String> tags;
     private List<String> directors;
     private List<Actor> actors;
     private String rating;
     private String language;
     private List<String> subtitles;
     private MovieStatus status;
-    private boolean deleted;
+
+    public Movie() {
+        this.tags = new ArrayList<>();
+        this.directors = new ArrayList<>();
+        this.actors = new ArrayList<>();
+        this.subtitles = new ArrayList<>();
+    }
 
     public int getMovieId() {
         return movieId;
@@ -62,11 +79,11 @@ public class Movie {
         this.description = description;
     }
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
@@ -78,11 +95,11 @@ public class Movie {
         this.imagePath = imagePath;
     }
 
-    public List<Tag> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -132,13 +149,5 @@ public class Movie {
 
     public void setStatus(MovieStatus status) {
         this.status = status;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
     }
 }

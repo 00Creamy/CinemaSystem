@@ -22,3 +22,10 @@ Customer
 Staff
 Manager
 Admin
+
+Note for next time:
+The way the database structured for both user.level and movie.status is bad, use enum
+Also check should be done in database too
+Plans timeline first
+Allocate around a day for user module
+Allocate a 4 hours per each module servlet, jsp, dao and models

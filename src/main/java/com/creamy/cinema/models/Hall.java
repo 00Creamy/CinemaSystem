@@ -3,6 +3,7 @@ package com.creamy.cinema.models;
 public class Hall {
     private int hallId;
     private String hallName;
+    private String hallType;
     private int rows;
     private int seatPerRow;
     private boolean deleted;
@@ -21,6 +22,14 @@ public class Hall {
 
     public void setHallName(String hallName) {
         this.hallName = hallName;
+    }
+
+    public String getHallType() {
+        return hallType;
+    }
+
+    public void setHallType(String hallType) {
+        this.hallType = hallType;
     }
 
     public int getRows() {

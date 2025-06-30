@@ -30,18 +30,20 @@ public class HallsCreate extends BaseServlet {
             User user = authorizeUser(request, response,2);
             if (user != null) {
                 String hallName = request.getParameter("hallName");
+                String hallType = request.getParameter("hallType");
                 String rowsInput = request.getParameter("rows");
                 String seatPerRowInput = request.getParameter("seatPerRow");
 
-                if (hallName != null && rowsInput != null && seatPerRowInput != null) {
+                if (isStringValid(hallName, hallType, rowsInput, seatPerRowInput)) {
                     int rows = Integer.parseInt(rowsInput);
                     int seatPerRow = Integer.parseInt(seatPerRowInput);
 
                     Hall hall = new Hall();
                     hall.setHallName(hallName);
+                    hall.setHallType(hallType);
                     hall.setRows(rows);
                     hall.setSeatPerRow(seatPerRow);
-                    HallDAO.updateHall(connection, hall);
+                    HallDAO.createHall(connection, hall);
 
                     response.sendRedirect("Halls");
                     return;

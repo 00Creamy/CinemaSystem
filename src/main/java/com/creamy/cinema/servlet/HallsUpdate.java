@@ -25,10 +25,10 @@ public class HallsUpdate extends BaseServlet {
                         request.setAttribute("updateHall", updateHall);
                         forward(request, response);
                     } else {
-                        printErrorRedirect(response.getWriter(), "Invalid id.", "Users");
+                        printErrorRedirect(response.getWriter(), "Invalid id.", "Halls");
                     }
                 } else {
-                    printErrorRedirect(response.getWriter(), "Invalid id.", "Users");
+                    printErrorRedirect(response.getWriter(), "Invalid id.", "Halls");
                 }
             }
         } catch (CinemaException e) {
@@ -43,6 +43,7 @@ public class HallsUpdate extends BaseServlet {
             if (user != null) {
                 String idInput = request.getParameter("id");
                 String hallName = request.getParameter("hallName");
+                String hallType = request.getParameter("hallType");
                 String rowsInput = request.getParameter("rows");
                 String seatPerRowInput = request.getParameter("seatPerRow");
 
@@ -52,11 +53,12 @@ public class HallsUpdate extends BaseServlet {
 
                     if (updateHall != null) {
                         try {
-                            if (hallName != null && rowsInput != null && seatPerRowInput != null) {
+                            if (isStringValid(hallName, hallType, rowsInput, seatPerRowInput)) {
                                 int rows = Integer.parseInt(rowsInput);
                                 int seatPerRow = Integer.parseInt(seatPerRowInput);
 
                                 updateHall.setHallName(hallName);
+                                updateHall.setHallType(hallType);
                                 updateHall.setRows(rows);
                                 updateHall.setSeatPerRow(seatPerRow);
                                 HallDAO.updateHall(connection, updateHall);

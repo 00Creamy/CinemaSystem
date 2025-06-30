@@ -1,7 +1,8 @@
 package com.creamy.cinema.servlet;
 
 import com.creamy.cinema.dao.HallDAO;
-import com.creamy.cinema.models.Hall;
+import com.creamy.cinema.dao.MovieDAO;
+import com.creamy.cinema.models.Movie;
 import com.creamy.cinema.models.User;
 import com.creamy.cinema.util.CinemaException;
 
@@ -15,13 +16,14 @@ public class MoviesList extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User user = authorizeUser(request, response, 1);
+            User user = getUserFromSession(request, response);
             if (user != null) {
-                List<Hall> halls = HallDAO.requestHalls(connection);
-                halls = halls.stream().filter(hall -> !hall.isDeleted()).toList();
-                request.setAttribute("halls", halls);
-                forward(request, response);
+                if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
+                    forward(request, response);
+                    return;
+                }
             }
+            forward(request, response);
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(), e.getMessage(), ".");
         }
@@ -29,6 +31,6 @@ public class MoviesList extends BaseServlet {
 
     @Override
     protected String getForwardPath() {
-        return "/WEB-INF/Halls.jsp";
+        return "/WEB-INF/Movies.jsp";
     }
 }

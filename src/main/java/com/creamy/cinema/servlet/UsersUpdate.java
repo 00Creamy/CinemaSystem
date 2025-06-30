@@ -60,29 +60,47 @@ public class UsersUpdate extends BaseServlet {
                     if (updateUser != null) {
                         if (updateUser.getUserId() == user.getUserId() || updateUser.getAccessLevel().getLevel() < user.getAccessLevel().getLevel()) {
                             try {
-                                if (isStringValid(username, name, email, phoneNo) && (user.getUserId() == updateUser.getUserId() || isStringValid(levelInput))) {
-                                    User.AccessLevel level = User.AccessLevel.getLevelByLevel(Integer.parseInt(levelInput));
+                                if (isStringValid(username, name, email, phoneNo)) {
                                     // RegEx for checking phone no, Optional + at the front and decimal at the back
                                     boolean validPhoneNo = phoneNo.matches("\\+?\\d+");
 
-                                    if (validPhoneNo && level != null && level.getLevel() < user.getAccessLevel().getLevel()) {
+                                    if (validPhoneNo) {
                                         User usernameCheck = UserDAO.requestUserByUsername(connection, username);
                                         if (usernameCheck == null || usernameCheck.getUserId() == updateUser.getUserId()) {
-                                            if (user.getUserId() == updateUser.getUserId()) {
-                                                updateUser.setUsername(username);
-                                                updateUser.setName(name);
-                                                updateUser.setEmail(email);
-                                                updateUser.setPhoneNo(phoneNo);
-                                                UserDAO.updateUser(connection, updateUser);
-
-                                                if (isStringValid(password)) {
-                                                    updateUser.setPassword(password);
-                                                    UserDAO.updateUserPassword(connection, updateUser);
+                                            if (user.getUserId() != updateUser.getUserId()) {
+                                                if (isStringValid(levelInput)) {
+                                                    User.AccessLevel level = User.AccessLevel.getLevelByLevel(Integer.parseInt(levelInput));
+                                                    if (level != null && level.getLevel() < user.getAccessLevel().getLevel()) {
+                                                        updateUser.setAccessLevel(level);
+                                                    } else {
+                                                        request.setAttribute("error", "Invalid level.");
+                                                        forward(request, response);
+                                                        return;
+                                                    }
+                                                } else {
+                                                    request.setAttribute("error", "Invalid level.");
+                                                    forward(request, response);
+                                                    return;
                                                 }
+                                            }
 
-                                                response.sendRedirect("Users");
+                                            if (isStringValid(password)) {
+                                                updateUser.setPassword(password);
+                                                UserDAO.updateUserPassword(connection, updateUser);
+                                            } else {
+                                                request.setAttribute("error", "Invalid password.");
+                                                forward(request, response);
                                                 return;
                                             }
+
+                                            updateUser.setUsername(username);
+                                            updateUser.setName(name);
+                                            updateUser.setEmail(email);
+                                            updateUser.setPhoneNo(phoneNo);
+                                            UserDAO.updateUser(connection, updateUser);
+
+                                            response.sendRedirect("Users");
+                                            return;
                                         } else {
                                             request.setAttribute("error", "Username is taken.");
                                         }
