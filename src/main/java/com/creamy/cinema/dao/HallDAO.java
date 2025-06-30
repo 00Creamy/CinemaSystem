@@ -64,7 +64,8 @@ public class HallDAO {
             statement.setString(2, hall.getHallType());
             statement.setInt(3, hall.getRows());
             statement.setInt(4, hall.getRows());
-            statement.setInt(5, hall.getHallId());
+            statement.setBoolean(5, hall.isDeleted());
+            statement.setInt(6, hall.getHallId());
 
             int affectedRows = statement.executeUpdate();
             return affectedRows > 0;

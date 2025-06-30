@@ -1,8 +1,9 @@
 package com.creamy.cinema.servlet;
 
 import com.creamy.cinema.dao.HallDAO;
-import com.creamy.cinema.dao.MovieDAO;
-import com.creamy.cinema.models.Movie;
+import com.creamy.cinema.dao.ScheduleDAO;
+import com.creamy.cinema.models.Hall;
+import com.creamy.cinema.models.Schedule;
 import com.creamy.cinema.models.User;
 import com.creamy.cinema.util.CinemaException;
 
@@ -12,18 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class MoviesList extends BaseServlet {
+public class ScheduleList extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = getUserFromSession(request, response);
             if (user != null) {
-                if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
-                    List<Movie> movies = MovieDAO.requestMovies(connection);
-                    request.setAttribute("movies", movies);
+                if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.MANAGER.getLevel()) {
+                    List<Schedule> schedules = ScheduleDAO.requestSchedules(connection);
+                    request.setAttribute("schedules", schedules);
                 } else {
-                    List<Movie> movies = MovieDAO.requestMovies(connection).stream().filter(movie -> movie.getStatus() != Movie.MovieStatus.ARCHIVED).toList();
-                    request.setAttribute("movies", movies);
+                    List<Schedule> schedules = ScheduleDAO.requestSchedules(connection).stream().filter(Schedule::isActive).toList();
+                    request.setAttribute("schedules", schedules);
                 }
             }
             forward(request, response);
@@ -34,6 +35,6 @@ public class MoviesList extends BaseServlet {
 
     @Override
     protected String getForwardPath() {
-        return "/WEB-INF/Movies.jsp";
+        return "/WEB-INF/Schedules.jsp";
     }
 }

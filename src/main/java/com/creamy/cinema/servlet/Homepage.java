@@ -21,7 +21,7 @@ public class Homepage extends BaseServlet {
             }
             forward(request, response);
         } catch (CinemaException e) {
-            printErrorRedirect(response.getWriter(),  e.getMessage(), "Login");
+            printErrorRedirect(response.getWriter(),  e.getMessage(), ".");
         }
     }
 

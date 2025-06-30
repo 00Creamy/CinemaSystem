@@ -8,6 +8,7 @@ public class Schedule {
     private int hallId;
     private LocalDateTime startDatetime;
     private LocalDateTime endDatetime;
+    private boolean deleted;
 
     public int getScheduleId() {
         return scheduleId;
@@ -47,5 +48,17 @@ public class Schedule {
 
     public void setEndDatetime(LocalDateTime endDatetime) {
         this.endDatetime = endDatetime;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isActive() {
+        return !deleted && startDatetime.plusMinutes(30).isAfter(LocalDateTime.now()) && startDatetime.minusDays(7).isBefore(LocalDateTime.now());
     }
 }

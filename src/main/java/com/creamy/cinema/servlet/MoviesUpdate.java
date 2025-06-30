@@ -97,7 +97,7 @@ public class MoviesUpdate extends BaseServlet {
                                     updateMovie.setSubtitles(subtitles);
                                     updateMovie.setStatus(status);
 
-                                    MovieDAO.createMovie(connection, updateMovie);
+                                    MovieDAO.updateMovie(connection, updateMovie);
                                     response.sendRedirect("Movies");
                                     return;
                                 } else {
