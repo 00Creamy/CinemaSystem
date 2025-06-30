@@ -13,11 +13,12 @@ import java.util.List;
 public class HallDAO {
     public static void createHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, rows, seat_per_row) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, type, rows, seat_per_row) VALUES (?, ?, ?)");
 
             statement.setString(1, hall.getHallName());
-            statement.setInt(2, hall.getRows());
-            statement.setInt(3, hall.getSeatPerRow());
+            statement.setString(2, hall.getHallType());
+            statement.setInt(3, hall.getRows());
+            statement.setInt(4, hall.getSeatPerRow());
 
             int hallId = connection.executeInsertStatement(statement);
             hall.setHallId(hallId);
@@ -58,10 +59,11 @@ public class HallDAO {
 
     public static boolean updateHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE hall SET name=?, rows=?, seat_per_row=?, deleted=? WHERE hall_id=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE hall SET name=?, type=?, rows=?, seat_per_row=?, deleted=? WHERE hall_id=?");
             statement.setString(1, hall.getHallName());
-            statement.setInt(2, hall.getRows());
+            statement.setString(2, hall.getHallType());
             statement.setInt(3, hall.getRows());
+            statement.setInt(4, hall.getRows());
             statement.setInt(5, hall.getHallId());
 
             int affectedRows = statement.executeUpdate();
@@ -72,12 +74,13 @@ public class HallDAO {
     }
 
     private static Hall getHallFromResultSet(ResultSet resultSet) throws SQLException {
-        Hall user = new Hall();
-        user.setHallId(resultSet.getInt("hall_id"));
-        user.setHallName(resultSet.getString("name"));
-        user.setRows(resultSet.getInt("rows"));
-        user.setSeatPerRow(resultSet.getInt("seat_per_row"));
-        user.setDeleted(resultSet.getBoolean("deleted"));
-        return user;
+        Hall hall = new Hall();
+        hall.setHallId(resultSet.getInt("hall_id"));
+        hall.setHallName(resultSet.getString("name"));
+        hall.setHallType(resultSet.getString("type"));
+        hall.setRows(resultSet.getInt("rows"));
+        hall.setSeatPerRow(resultSet.getInt("seat_per_row"));
+        hall.setDeleted(resultSet.getBoolean("deleted"));
+        return hall;
     }
 }
