@@ -1,5 +1,7 @@
 package com.creamy.cinema.servlet;
 
+import com.creamy.cinema.dao.MovieDAO;
+import com.creamy.cinema.models.Movie;
 import com.creamy.cinema.models.User;
 import com.creamy.cinema.util.CinemaException;
 
@@ -19,6 +21,7 @@ public class Homepage extends BaseServlet {
                     return;
                 }
             }
+            request.setAttribute("movies", MovieDAO.requestMovies(connection).stream().filter(movie -> movie.getStatus() == Movie.MovieStatus.AIRING).toList());
             forward(request, response);
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(),  e.getMessage(), ".");
