@@ -29,7 +29,7 @@
                     <td>Hall</td>
                     <td>Start Time</td>
                     <td>End Time</td>
-                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td colspan='2'>Action</td>" : ""%>
+                    <%=(user.getAccessLevel().getLevel() >= 1) ? "<td colspan='3'>Action</td>" : ""%>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +41,7 @@
                     <td><%=halls.get(schedule.getHallId()).getHallName()%></td>
                     <td><%=schedule.getStartDatetime().toString()%></td>
                     <td><%=schedule.getEndDatetime().toString()%></td>
+                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./AddBooking?id=" + schedule.getScheduleId() + "'>Add Booking</a></td>" : ""%>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./UpdateSchedule?id=" + schedule.getScheduleId() + "'>Update</a></td>" : ""%>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./DeleteSchedule?id=" + schedule.getScheduleId() + "'>Delete</a></td>" : ""%>
                 </tr>
