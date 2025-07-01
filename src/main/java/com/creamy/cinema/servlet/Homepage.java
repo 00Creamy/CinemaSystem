@@ -17,7 +17,7 @@ public class Homepage extends BaseServlet {
             User user = getUserFromSession(request, response);
             if (user != null) {
                 if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
-                    forward(request, response, "/WEB-INF/Dashboard.jsp");
+                    forward(request, response, "/WEB-INF/Customer/Homepage.jsp");
                     return;
                 }
             }

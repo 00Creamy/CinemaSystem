@@ -30,7 +30,7 @@
         %>
         <form method="post">
             <input type="hidden" name="id" value="<%=updateHall.getHallId()%>">
-            <select name="movieId">
+            Movie: <select name="movieId">
                 <%
                 for (Movie movie: movies) {
                 %>
@@ -38,8 +38,8 @@
                 <%
                 }
                 %>
-            </select>
-            <select name="hallId">
+            </select><br>
+            Hall: <select name="hallId">
                 <%
                 for (Hall hall: halls) {
                 %>
@@ -47,7 +47,7 @@
                 <%
                 }
                 %>
-            </select>
+            </select><br>
             Start Time: <input type="datetime-local" name="startDatetime" value="<%=schedule.getStartDatetime().format(df)%>" required><br>
             End Time: <input type="datetime-local" name="endDatetime" value="<%=schedule.getEndDatetime().format(df)%>" required><br>
             <input type="submit" value="Submit">

@@ -6,7 +6,6 @@
     <title>Payment</title>
     <link href="default.css" rel="stylesheet">
     <link href="stylepage.css" rel="stylesheet">
-    
 </head>
 <body>
     <header>

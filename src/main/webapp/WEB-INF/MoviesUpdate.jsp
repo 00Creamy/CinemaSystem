@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="com.creamy.cinema.models.User"%>
-<%@ page import="com.creamy.cinema.models.Hall"%>
+<%@ page import="com.creamy.cinema.models.Movie"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +32,7 @@
             Rating: <input type="text" name="rating" value="<%=updateMovie.getRating()%>" required><br
             Language: <input type="text" name="language" value="<%=updateMovie.getLanguage()%>" required><br>
             Subtitles: <input type="text" name="subtitles" value="<%=String.join(",", updateMovie.getSubtitles())%>" required><br>
-            <select name="status">
+            Status: <select name="status">
                 <%
                 for (Movie.MovieStatus status: Movie.MovieStatus.values()) {
                 %>
@@ -40,7 +40,7 @@
                 <%
                 }
                 %>
-            </select>
+            </select><br>
             <input type="submit" value="Submit">
         </form>
     </div>
