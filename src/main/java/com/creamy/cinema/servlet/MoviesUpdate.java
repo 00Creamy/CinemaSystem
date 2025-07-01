@@ -73,15 +73,15 @@ public class MoviesUpdate extends BaseServlet {
                                 int seconds = Integer.parseInt(secondsInput);
                                 Duration duration = Duration.ofHours(hours).plusMinutes(mins).plusSeconds(seconds);
                                 List<String> tags = Stream.of(tagsInput.split(",")).filter(s -> !s.isBlank()).toList();
-                                List<String> directors = Stream.of(tagsInput.split(",")).filter(s -> !s.isBlank()).toList();
-                                List<Actor> actors = Stream.of(tagsInput.split(",")).filter(s -> !s.isBlank()).map(s -> {
+                                List<String> directors = Stream.of(directorsInput.split(",")).filter(s -> !s.isBlank()).toList();
+                                List<Actor> actors = Stream.of(actorsInput.split(",")).filter(s -> !s.isBlank()).map(s -> {
                                     String[] split = s.split(":");
                                     Actor actor = new Actor();
                                     actor.setName(split[0]);
                                     actor.setRole(split[1]);
                                     return actor;
                                 }).toList();
-                                List<String> subtitles = Stream.of(tagsInput.split(",")).filter(s -> !s.isBlank()).toList();
+                                List<String> subtitles = Stream.of(subtitlesInput.split(",")).filter(s -> !s.isBlank()).toList();
                                 Movie.MovieStatus status = Movie.MovieStatus.getStatusFromLevel(Integer.parseInt(statusInput));
 
                                 if (status != null) {

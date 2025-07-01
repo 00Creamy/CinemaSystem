@@ -29,7 +29,7 @@
             Tags: <input type="text" name="tags" value="<%=String.join(",", updateMovie.getTags())%>" required><br>
             Directors: <input type="text" name="directors" value="<%=String.join(",", updateMovie.getDirectors())%>" required><br>
             Actors: <input type="text" name="actors" value="<%=String.join(",", updateMovie.getActors().stream().map(actor -> actor.getName() + ": " + actor.getRole()).toList())%>" required><br>
-            Rating: <input type="text" name="rating" value="<%=updateMovie.getRating()%>" required><br
+            Rating: <input type="text" name="rating" value="<%=updateMovie.getRating()%>" required><br>
             Language: <input type="text" name="language" value="<%=updateMovie.getLanguage()%>" required><br>
             Subtitles: <input type="text" name="subtitles" value="<%=String.join(",", updateMovie.getSubtitles())%>" required><br>
             Status: <select name="status">
