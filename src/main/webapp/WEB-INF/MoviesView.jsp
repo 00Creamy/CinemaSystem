@@ -1,7 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="com.creamy.cinema.models.User" %>
-<%@ page import="com.creamy.cinema.models.Hall" %>
+<%@ page import="com.creamy.cinema.models.Movie" %>
+<%@ page import="com.creamy.cinema.models.Actor" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +15,10 @@
     <%
     User user = (User) session.getAttribute("user");
     Movie movie = (Movie) request.getAttribute("movie");
+    List<String> actors = new ArrayList();
+    for (Actor actor: movie.getActors()) {
+        actors.add(actor.getName() + ":" + actor.getRole());
+    }
     %>
     <jsp:include page="Sidebar.jsp" />
     <div id="content">
@@ -20,11 +26,11 @@
             <tbody>
                 <tr>
                     <td>Title: </td>
-                    <td><%=movie.getHallName()%></td>
+                    <td><%=movie.getTitle()%></td>
                 </tr>
                 <tr>
                     <td>Description: </td>
-                    <td><%=movie.getHallType()%></td>
+                    <td><%=movie.getDescription()%></td>
                 </tr>
                 <tr>
                     <td>Duration: </td>
@@ -40,7 +46,7 @@
                 </tr>
                 <tr>
                     <td>Actors: </td>
-                    <td><%=String.join(", ", movie.getActors().stream().map(actor -> actor.getName() + ": " + actor.getRole()).toList())%></td>
+                    <td><%=String.join(", ", actors)%></td>
                 </tr>
                 <tr>
                     <td>Rating: </td>

@@ -38,7 +38,7 @@
                     <td><%=movie.getRating()%></td>
                     <td><%=movie.getLanguage()%></td>
                     <td><%=movie.getStatus().getName()%></td>
-                    <td><a href="./Movies?id=<%=movie.getStatus().getName()%>">View</a></td>
+                    <td><a href="./Movies?id=<%=movie.getMovieId()%>">View</a></td>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./UpdateMovie?id=" + movie.getMovieId() + "'>Update</a></td>" : ""%>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./DeleteMovie?id=" + movie.getMovieId() + "'>Delete</a></td>" : ""%>
                 </tr>

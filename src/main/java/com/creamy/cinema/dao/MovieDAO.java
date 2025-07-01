@@ -26,6 +26,7 @@ public class MovieDAO {
             statement.setInt(7, movie.getStatus().getLevel());
 
             int createdId = connection.executeInsertStatement(statement);
+            movie.setMovieId(createdId);
 
             for (String tag: movie.getTags()) {
                 statement = connection.prepareStatement("INSERT INTO movie_tag (movie_id, tag) VALUES (?, ?)");
@@ -42,7 +43,7 @@ public class MovieDAO {
             }
 
             for (Actor actor: movie.getActors()) {
-                statement = connection.prepareStatement("INSERT INTO movie_tag (movie_id, name, role) VALUES (?, ?, ?)");
+                statement = connection.prepareStatement("INSERT INTO movie_actor (movie_id, name, role) VALUES (?, ?, ?)");
                 statement.setInt(1, movie.getMovieId());
                 statement.setString(2, actor.getName());
                 statement.setString(3, actor.getRole());
@@ -251,7 +252,7 @@ public class MovieDAO {
         resultSet = connection.executeStatement(statement);
 
         while (resultSet.next()) {
-            movie.getDirectors().add(resultSet.getString("subtitle"));
+            movie.getSubtitles().add(resultSet.getString("subtitle"));
         }
     }
 }

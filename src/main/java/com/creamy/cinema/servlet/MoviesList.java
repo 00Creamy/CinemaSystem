@@ -27,6 +27,8 @@ public class MoviesList extends BaseServlet {
                     }
                     List<Movie> movies = MovieDAO.requestMovies(connection);
                     request.setAttribute("movies", movies);
+                    forward(request, response);
+                    return;
                 } else {
                     if (movieIdInput != null) {
                         Movie movie = MovieDAO.requestMovieByMovieId(connection, Integer.parseInt(movieIdInput));
