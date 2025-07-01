@@ -17,12 +17,12 @@ public class Homepage extends BaseServlet {
             User user = getUserFromSession(request, response);
             if (user != null) {
                 if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
-                    forward(request, response, "/WEB-INF/Customer/Homepage.jsp");
+                    forward(request, response);
                     return;
                 }
             }
             request.setAttribute("movies", MovieDAO.requestMovies(connection).stream().filter(movie -> movie.getStatus() == Movie.MovieStatus.AIRING).toList());
-            forward(request, response);
+            forward(request, response, "/WEB-INF/Customer/Homepage.jsp");
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(),  e.getMessage(), ".");
         }
