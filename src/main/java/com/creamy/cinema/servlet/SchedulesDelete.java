@@ -25,6 +25,7 @@ public class SchedulesDelete extends BaseServlet {
                     if (deleteSchedule != null) {
                         deleteSchedule.setDeleted(true);
                         ScheduleDAO.updateSchedule(connection, deleteSchedule);
+                        response.sendRedirect("Schedules");
                     } else {
                         printErrorRedirect(response.getWriter(), "Invalid id.", "Schedules");
                     }

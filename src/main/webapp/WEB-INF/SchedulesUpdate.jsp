@@ -29,12 +29,12 @@
         }
         %>
         <form method="post">
-            <input type="hidden" name="id" value="<%=updateHall.getHallId()%>">
+            <input type="hidden" name="id" value="<%=updateSchedule.getHallId()%>">
             Movie: <select name="movieId">
                 <%
                 for (Movie movie: movies) {
                 %>
-                <option value="<%=movie.getMovieId()%>" <%=(movie.getMovieId() == updateMovie.getMovieId()) ? "selected" : ""%>><%=movie.getTitle()%></option>
+                <option value="<%=movie.getMovieId()%>" <%=(movie.getMovieId() == updateSchedule.getMovieId()) ? "selected" : ""%>><%=movie.getTitle()%></option>
                 <%
                 }
                 %>
@@ -43,13 +43,13 @@
                 <%
                 for (Hall hall: halls) {
                 %>
-                <option value="<%=hall.getHallId()%>" <%=(hall.getHallId() == updateMovie.getHallId()) ? "selected" : ""%>><%=hall.getHallName()%></option>
+                <option value="<%=hall.getHallId()%>" <%=(hall.getHallId() == updateSchedule.getHallId()) ? "selected" : ""%>><%=hall.getHallName()%></option>
                 <%
                 }
                 %>
             </select><br>
-            Start Time: <input type="datetime-local" name="startDatetime" value="<%=schedule.getStartDatetime().format(df)%>" required><br>
-            End Time: <input type="datetime-local" name="endDatetime" value="<%=schedule.getEndDatetime().format(df)%>" required><br>
+            Start Time: <input type="datetime-local" name="startDatetime" value="<%=updateSchedule.getStartDatetime().format(df)%>" required><br>
+            End Time: <input type="datetime-local" name="endDatetime" value="<%=updateSchedule.getEndDatetime().format(df)%>" required><br>
             <input type="submit" value="Submit">
         </form>
     </div>

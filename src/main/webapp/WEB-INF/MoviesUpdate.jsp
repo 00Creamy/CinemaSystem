@@ -1,6 +1,9 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="com.creamy.cinema.models.User"%>
 <%@ page import="com.creamy.cinema.models.Movie"%>
+<%@ page import="com.creamy.cinema.models.Actor"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +15,10 @@
     <%
     User user = (User) session.getAttribute("user");
     Movie updateMovie = (Movie) request.getAttribute("updateMovie");
+    List<String> actors = new ArrayList();
+    for (Actor actor: updateMovie.getActors()) {
+        actors.add(actor.getName() + ":" + actor.getRole());
+    }
     %>
     <jsp:include page="Sidebar.jsp" />
     <div id="content">
@@ -28,7 +35,7 @@
             Duration: <input type="number" name="hours" value="<%=updateMovie.getDuration().toHours()%>" required>:<input type="number" name="mins" value="<%=updateMovie.getDuration().toMinutesPart()%>" required>:<input type="number" name="seconds" value="<%=updateMovie.getDuration().toSecondsPart()%>" required><br>
             Tags: <input type="text" name="tags" value="<%=String.join(",", updateMovie.getTags())%>" required><br>
             Directors: <input type="text" name="directors" value="<%=String.join(",", updateMovie.getDirectors())%>" required><br>
-            Actors: <input type="text" name="actors" value="<%=String.join(",", updateMovie.getActors().stream().map(actor -> actor.getName() + ": " + actor.getRole()).toList())%>" required><br>
+            Actors: <input type="text" name="actors" value="<%=String.join(",", actors)%>" required><br>
             Rating: <input type="text" name="rating" value="<%=updateMovie.getRating()%>" required><br>
             Language: <input type="text" name="language" value="<%=updateMovie.getLanguage()%>" required><br>
             Subtitles: <input type="text" name="subtitles" value="<%=String.join(",", updateMovie.getSubtitles())%>" required><br>

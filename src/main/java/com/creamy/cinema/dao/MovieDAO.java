@@ -131,7 +131,7 @@ public class MovieDAO {
                 }
 
                 for (String remove: removed) {
-                    statement = connection.prepareStatement("DELETE FROM movie_subtitle WHERE movie_id=?, subtitle=?");
+                    statement = connection.prepareStatement("DELETE FROM movie_subtitle WHERE movie_id=? AND subtitle=?");
                     statement.setInt(1, movie.getMovieId());
                     statement.setString(2, remove);
                     statement.executeUpdate();
@@ -150,7 +150,7 @@ public class MovieDAO {
                 }
 
                 for (String remove: removed) {
-                    statement = connection.prepareStatement("DELETE FROM movie_director WHERE movie_id=?, director=?");
+                    statement = connection.prepareStatement("DELETE FROM movie_director WHERE movie_id=? AND director=?");
                     statement.setInt(1, movie.getMovieId());
                     statement.setString(2, remove);
                     statement.executeUpdate();
@@ -170,7 +170,7 @@ public class MovieDAO {
                 }
 
                 for (Actor remove: removedActors) {
-                    statement = connection.prepareStatement("DELETE FROM movie_director WHERE movie_id=?, name=?, role=?");
+                    statement = connection.prepareStatement("DELETE FROM movie_actor WHERE movie_id=? AND name=? AND role=?");
                     statement.setInt(1, movie.getMovieId());
                     statement.setString(2, remove.getName());
                     statement.setString(3, remove.getRole());
@@ -190,7 +190,7 @@ public class MovieDAO {
                 }
 
                 for (String remove: removed) {
-                    statement = connection.prepareStatement("DELETE FROM movie_subtitle WHERE movie_id=?, subtitle=?");
+                    statement = connection.prepareStatement("DELETE FROM movie_subtitle WHERE movie_id=? AND subtitle=?");
                     statement.setInt(1, movie.getMovieId());
                     statement.setString(2, remove);
                     statement.executeUpdate();
