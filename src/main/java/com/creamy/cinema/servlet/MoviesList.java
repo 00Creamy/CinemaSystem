@@ -18,10 +18,23 @@ public class MoviesList extends BaseServlet {
         try {
             User user = getUserFromSession(request, response);
             if (user != null) {
+                String movieIdInput = request.getParameter("id");
                 if (verifyUser(request, user) && user.getAccessLevel().getLevel() >= User.AccessLevel.STAFF.getLevel()) {
+                    if (movieIdInput != null) {
+                        Movie movie = MovieDAO.requestMovieByMovieId(connection, Integer.parseInt(movieIdInput));
+                        request.setAttribute("movie", movie);
+                        forward(request, response, "/WEB-INF/MoviesView.jsp");
+                        return;
+                    }
                     List<Movie> movies = MovieDAO.requestMovies(connection);
                     request.setAttribute("movies", movies);
                 } else {
+                    if (movieIdInput != null) {
+                        Movie movie = MovieDAO.requestMovieByMovieId(connection, Integer.parseInt(movieIdInput));
+                        request.setAttribute("movie", movie);
+                        forward(request, response, "/WEB-INF/MoviesView.jsp");
+                        return;
+                    }
                     List<Movie> movies = MovieDAO.requestMovies(connection).stream().filter(movie -> movie.getStatus() != Movie.MovieStatus.ARCHIVED).toList();
                     request.setAttribute("movies", movies);
                 }

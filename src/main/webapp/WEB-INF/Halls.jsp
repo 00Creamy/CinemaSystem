@@ -12,7 +12,7 @@
 <body>
     <%
     User user = (User) session.getAttribute("user");
-    List<Hall> users = (List<Hall>) request.getAttribute("halls");
+    List<Hall> halls = (List<Hall>) request.getAttribute("halls");
     %>
     <jsp:include page="Sidebar.jsp" />
     <div id="content">
@@ -21,6 +21,7 @@
             <thead>
                 <tr>
                     <td>Hall Name</td>
+                    <td>Hall Type</td>
                     <td>Rows</td>
                     <td>Seat per row</td>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td colspan='2'>Action</td>" : ""%>
@@ -32,6 +33,7 @@
                 %>
                 <tr>
                     <td><%=hall.getHallName()%></td>
+                    <td><%=hall.getHallType()%></td>
                     <td><%=hall.getRows()%></td>
                     <td><%=hall.getSeatPerRow()%></td>
                     <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./UpdateHall?id=" + hall.getHallId() + "'>Update</a></td>" : ""%>

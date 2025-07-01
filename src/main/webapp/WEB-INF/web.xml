@@ -20,7 +20,7 @@
         <servlet-class>com.creamy.cinema.servlet.UsersList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>UsersAdd</servlet-name>
+        <servlet-name>UsersCreate</servlet-name>
         <servlet-class>com.creamy.cinema.servlet.UsersCreate</servlet-class>
     </servlet>
     <servlet>
@@ -30,6 +30,54 @@
     <servlet>
         <servlet-name>UsersDelete</servlet-name>
         <servlet-class>com.creamy.cinema.servlet.UsersDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HallsList</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.HallsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HallsCreate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.HallsCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HallsUpdate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.HallsUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HallsDelete</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.HallsDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesList</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.MoviesList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesCreate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.MoviesCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesUpdate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.MoviesUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoviesDelete</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.MoviesDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SchedulesList</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.SchedulesList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SchedulesCreate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.SchedulesCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SchedulesUpdate</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.SchedulesUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SchedulesDelete</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.SchedulesDelete</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
@@ -44,7 +92,7 @@
         <url-pattern>/Users</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UsersAdd</servlet-name>
+        <servlet-name>UsersCreate</servlet-name>
         <url-pattern>/AddUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -54,6 +102,54 @@
     <servlet-mapping>
         <servlet-name>UsersDelete</servlet-name>
         <url-pattern>/DeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HallsList</servlet-name>
+        <url-pattern>/Halls</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HallsCreate</servlet-name>
+        <url-pattern>/AddHall</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HallsUpdate</servlet-name>
+        <url-pattern>/UpdateHall</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HallsDelete</servlet-name>
+        <url-pattern>/DeleteHall</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesList</servlet-name>
+        <url-pattern>/Movies</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesCreate</servlet-name>
+        <url-pattern>/AddMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesUpdate</servlet-name>
+        <url-pattern>/UpdateMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoviesDelete</servlet-name>
+        <url-pattern>/DeleteMovie</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SchedulesList</servlet-name>
+        <url-pattern>/Schedules</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SchedulesCreate</servlet-name>
+        <url-pattern>/AddSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SchedulesUpdate</servlet-name>
+        <url-pattern>/UpdateSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SchedulesDelete</servlet-name>
+        <url-pattern>/DeleteSchedule</url-pattern>
     </servlet-mapping>
 
     <session-config>

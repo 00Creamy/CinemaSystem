@@ -64,7 +64,7 @@ public class MovieDAO {
 
     public static List<Movie> requestMovies(DBConnection connection) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM movie");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM movie WHERE deleted=0");
             ArrayList<Movie> movies = new ArrayList<>();
 
             ResultSet resultSet = connection.executeStatement(statement);
@@ -103,7 +103,7 @@ public class MovieDAO {
     public static boolean updateMovie(DBConnection connection, Movie movie) throws CinemaException {
         try {
             Movie original = requestMovieByMovieId(connection, movie.getMovieId());
-            PreparedStatement statement = connection.prepareStatement("UPDATE movie SET title=?, description=?, duration=?, image_path=?, rating=?, language=?, status=? WHERE movie_id=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE movie SET title=?, description=?, duration=?, image_path=?, rating=?, language=?, status=?, deleted=? WHERE movie_id=?");
 
             statement.setString(1, movie.getTitle());
             statement.setString(2, movie.getDescription());
@@ -112,7 +112,8 @@ public class MovieDAO {
             statement.setString(5, movie.getRating());
             statement.setString(6, movie.getLanguage());
             statement.setInt(7, movie.getStatus().getLevel());
-            statement.setInt(8, movie.getMovieId());
+            statement.setBoolean(8, movie.isDeleted());
+            statement.setInt(9, movie.getMovieId());
 
             int affectedRows = statement.executeUpdate();
             if (affectedRows > 0) {
@@ -212,6 +213,7 @@ public class MovieDAO {
         movie.setRating(resultSet.getString("rating"));
         movie.setLanguage(resultSet.getString("language"));
         movie.setStatus(Movie.MovieStatus.getStatusFromLevel(resultSet.getInt("status")));
+        movie.setDeleted(resultSet.getBoolean("deleted"));
 
         return movie;
     }

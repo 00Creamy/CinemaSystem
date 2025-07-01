@@ -13,7 +13,7 @@ import java.util.List;
 public class HallDAO {
     public static void createHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, type, hall_rows, seat_per_row) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO hall (name, type, hall_rows, seat_per_row) VALUES (?, ?, ?, ?)");
 
             statement.setString(1, hall.getHallName());
             statement.setString(2, hall.getHallType());
@@ -29,7 +29,7 @@ public class HallDAO {
 
     public static List<Hall> requestHalls(DBConnection connection) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM hall");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM hall WHERE deleted=0");
             ArrayList<Hall> halls = new ArrayList<>();
             ResultSet resultSet = connection.executeStatement(statement);
             while (resultSet.next()) {
@@ -57,13 +57,25 @@ public class HallDAO {
         }
     }
 
+    public static List<String> requestAllSeat(DBConnection connection, int hallId) throws CinemaException {
+        List<String> seats = new ArrayList<>();
+        Hall hall = HallDAO.requestHallByHallId(connection, hallId);
+        for (int i = 0; i < hall.getRows(); i++) {
+            String label = toRowLabel(i);
+            for (int j = 0; j < hall.getSeatPerRow(); j++) {
+                seats.add(label + j);
+            }
+        }
+        return seats;
+    }
+
     public static boolean updateHall(DBConnection connection, Hall hall) throws CinemaException {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE hall SET name=?, type=?, hall_rows=?, seat_per_row=?, deleted=? WHERE hall_id=?");
             statement.setString(1, hall.getHallName());
             statement.setString(2, hall.getHallType());
             statement.setInt(3, hall.getRows());
-            statement.setInt(4, hall.getRows());
+            statement.setInt(4, hall.getSeatPerRow());
             statement.setBoolean(5, hall.isDeleted());
             statement.setInt(6, hall.getHallId());
 
@@ -83,5 +95,17 @@ public class HallDAO {
         hall.setSeatPerRow(resultSet.getInt("seat_per_row"));
         hall.setDeleted(resultSet.getBoolean("deleted"));
         return hall;
+    }
+
+    public static String toRowLabel(int index) {
+        StringBuilder label = new StringBuilder();
+        index++; // 1-based for calculation
+        while (index > 0) {
+            index--; // shift to 0-based
+            char c = (char) ('A' + (index % 26));
+            label.insert(0, c);
+            index /= 26;
+        }
+        return label.toString();
     }
 }

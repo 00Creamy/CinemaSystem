@@ -47,10 +47,6 @@ public class DBConnection {
         return resultSet;
     }
 
-    public ResultSet executeStatement(String query) throws SQLException {
-        return executeStatement(prepareStatement(query));
-    }
-
     public int executeInsertStatement(PreparedStatement statement) throws SQLException {
         int affectedRows = statement.executeUpdate();
 

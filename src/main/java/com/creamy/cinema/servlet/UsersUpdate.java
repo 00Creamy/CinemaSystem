@@ -74,11 +74,13 @@ public class UsersUpdate extends BaseServlet {
                                                         updateUser.setAccessLevel(level);
                                                     } else {
                                                         request.setAttribute("error", "Invalid level.");
+                                                        request.setAttribute("updateUser", updateUser);
                                                         forward(request, response);
                                                         return;
                                                     }
                                                 } else {
                                                     request.setAttribute("error", "Invalid level.");
+                                                    request.setAttribute("updateUser", updateUser);
                                                     forward(request, response);
                                                     return;
                                                 }
@@ -89,6 +91,7 @@ public class UsersUpdate extends BaseServlet {
                                                 UserDAO.updateUserPassword(connection, updateUser);
                                             } else {
                                                 request.setAttribute("error", "Invalid password.");
+                                                request.setAttribute("updateUser", updateUser);
                                                 forward(request, response);
                                                 return;
                                             }

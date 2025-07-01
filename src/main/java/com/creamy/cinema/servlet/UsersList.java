@@ -16,15 +16,28 @@ public class UsersList extends BaseServlet {
         try {
             User user = authorizeUser(request, response, 1);
             if (user != null) {
-                List<User> users = UserDAO.requestUsers(connection).stream().filter(user1 -> !user1.isDeleted()).toList();
-                if (user.getAccessLevel().getLevel() < 2) {
-                    users = users.stream().filter(user1 -> user1.getAccessLevel().getLevel() < 1).toList();
+                String userIdInput = request.getParameter("id");
+                if (userIdInput ==  null) {
+                    List<User> users = UserDAO.requestUsers(connection);
+                    if (user.getAccessLevel().getLevel() < 2) {
+                        users = users.stream().filter(user1 -> user1.getAccessLevel().getLevel() < 1).toList();
+                    }
+                    request.setAttribute("users", users);
+                    forward(request, response);
+                } else {
+                    User userView = UserDAO.requestUserByUserId(connection, Integer.parseInt(userIdInput));
+                    if (userView != null) {
+                        request.setAttribute("user", userView);
+                        forward(request, response, "/WEB-INF/UsersView.jsp");
+                    } else {
+                        printErrorRedirect(response.getWriter(), "Invalid id.", "Users");
+                    }
                 }
-                request.setAttribute("users", users);
-                forward(request, response);
             }
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(), e.getMessage(), ".");
+        } catch (NumberFormatException e) {
+            printErrorRedirect(response.getWriter(), "Invalid id.", "Users");
         }
     }
 

@@ -17,13 +17,25 @@ public class HallsList extends BaseServlet {
         try {
             User user = authorizeUser(request, response, 1);
             if (user != null) {
-                List<Hall> halls = HallDAO.requestHalls(connection);
-                halls = halls.stream().filter(hall -> !hall.isDeleted()).toList();
-                request.setAttribute("halls", halls);
-                forward(request, response);
+                String hallIdInput = request.getParameter("id");
+                if (hallIdInput == null) {
+                    List<Hall> halls = HallDAO.requestHalls(connection);
+                    request.setAttribute("halls", halls);
+                    forward(request, response);
+                } else {
+                    Hall hall = HallDAO.requestHallByHallId(connection, Integer.parseInt(hallIdInput));
+                    if (hall != null) {
+                        request.setAttribute("hall", hall);
+                        forward(request, response, "/WEB-INF/HallsView.jsp");
+                    } else {
+                        printErrorRedirect(response.getWriter(), "Invalid id.", "Halls");
+                    }
+                }
             }
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(), e.getMessage(), ".");
+        } catch (NumberFormatException e) {
+            printErrorRedirect(response.getWriter(), "Invalid id.", "Halls");
         }
     }
 

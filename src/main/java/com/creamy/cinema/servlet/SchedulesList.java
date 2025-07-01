@@ -1,8 +1,6 @@
 package com.creamy.cinema.servlet;
 
-import com.creamy.cinema.dao.HallDAO;
 import com.creamy.cinema.dao.ScheduleDAO;
-import com.creamy.cinema.models.Hall;
 import com.creamy.cinema.models.Schedule;
 import com.creamy.cinema.models.User;
 import com.creamy.cinema.util.CinemaException;
@@ -13,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ScheduleList extends BaseServlet {
+public class SchedulesList extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

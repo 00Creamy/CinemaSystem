@@ -47,6 +47,7 @@ public class Movie {
     private String language;
     private List<String> subtitles;
     private MovieStatus status;
+    private boolean deleted;
 
     public Movie() {
         this.tags = new ArrayList<>();
@@ -149,5 +150,13 @@ public class Movie {
 
     public void setStatus(MovieStatus status) {
         this.status = status;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

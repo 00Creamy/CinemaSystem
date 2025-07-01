@@ -31,7 +31,7 @@ public class ScheduleDAO {
 
     public static List<Schedule> requestSchedules(DBConnection connection) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule WHERE deleted=0");
             ArrayList<Schedule> schedules = new ArrayList<>();
             ResultSet resultSet = connection.executeStatement(statement);
             while (resultSet.next()) {

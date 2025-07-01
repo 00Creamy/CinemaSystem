@@ -65,7 +65,7 @@ public class UserDAO {
 
     public static List<User> requestUsers(DBConnection connection) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM user");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE deleted=0");
             ArrayList<User> users = new ArrayList<>();
             ResultSet resultSet = connection.executeStatement(statement);
             while (resultSet.next()) {
