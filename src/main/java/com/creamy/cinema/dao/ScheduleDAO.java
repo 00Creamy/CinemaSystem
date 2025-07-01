@@ -61,7 +61,7 @@ public class ScheduleDAO {
 
     public static boolean requestScheduleAvailability(DBConnection connection, Schedule schedule) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule WHERE hall_id=? AND start_datetime < ? AND end_datetime > ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule WHERE hall_id=? AND start_datetime < ? AND end_datetime > ? AND deleted=0");
             statement.setInt(1, schedule.getHallId());
             statement.setTimestamp(2, Timestamp.valueOf(schedule.getEndDatetime()));
             statement.setTimestamp(3, Timestamp.valueOf(schedule.getStartDatetime()));
@@ -79,7 +79,7 @@ public class ScheduleDAO {
 
     public static boolean requestScheduleUpdateAvailability(DBConnection connection, Schedule schedule) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule WHERE schedule_id!=? AND hall_id=? AND start_datetime < ? AND end_datetime > ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM schedule WHERE schedule_id!=? AND hall_id=? AND start_datetime < ? AND end_datetime > ? AND deleted=0");
             statement.setInt(1, schedule.getScheduleId());
             statement.setInt(2, schedule.getHallId());
             statement.setTimestamp(3, Timestamp.valueOf(schedule.getEndDatetime()));

@@ -15,7 +15,9 @@ public class BookingsCreate extends BaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             User user = authorizeUser(request, response,2);
+            String
             if (user != null) {
+                if ()
                 forward(request, response);
             }
         } catch (CinemaException e) {
