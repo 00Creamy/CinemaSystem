@@ -27,7 +27,7 @@
             Tags: <input type="text" name="tags" required><br>
             Directors: <input type="text" name="directors" required><br>
             Actors: <input type="text" name="actors" required><br>
-            Rating: <input type="text" name="rating" required><br
+            Rating: <input type="text" name="rating" required><br>
             Language: <input type="text" name="language" required><br>
             Subtitles: <input type="text" name="subtitles" required><br>
             Status: <select name="status">

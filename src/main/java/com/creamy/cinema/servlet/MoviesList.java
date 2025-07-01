@@ -1,6 +1,5 @@
 package com.creamy.cinema.servlet;
 
-import com.creamy.cinema.dao.HallDAO;
 import com.creamy.cinema.dao.MovieDAO;
 import com.creamy.cinema.models.Movie;
 import com.creamy.cinema.models.User;
@@ -32,7 +31,7 @@ public class MoviesList extends BaseServlet {
                     if (movieIdInput != null) {
                         Movie movie = MovieDAO.requestMovieByMovieId(connection, Integer.parseInt(movieIdInput));
                         request.setAttribute("movie", movie);
-                        forward(request, response, "/WEB-INF/MoviesView.jsp");
+                        forward(request, response, "/WEB-INF/Customer/MoviesView.jsp");
                         return;
                     }
                     List<Movie> movies = MovieDAO.requestMovies(connection).stream().filter(movie -> movie.getStatus() != Movie.MovieStatus.ARCHIVED).toList();
@@ -42,6 +41,8 @@ public class MoviesList extends BaseServlet {
             forward(request, response);
         } catch (CinemaException e) {
             printErrorRedirect(response.getWriter(), e.getMessage(), ".");
+        } catch (NumberFormatException e) {
+            printErrorRedirect(response.getWriter(), "Invalid id.", "Movies");
         }
     }
 
