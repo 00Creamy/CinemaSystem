@@ -22,7 +22,7 @@
         }
         %>
         <form method="post">
-            <input type="hidden" name="scheduleId" value="<%=request.getParameter("scheduleId")"%>">
+            <input type="hidden" name="scheduleId" value="<%=request.getParameter("scheduleId")%>">
             Seat:
             <select name="seat">
                 <%

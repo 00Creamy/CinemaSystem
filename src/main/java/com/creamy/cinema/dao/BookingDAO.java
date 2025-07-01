@@ -15,7 +15,7 @@ import java.util.List;
 public class BookingDAO {
     public static void createBooking(DBConnection connection, Booking booking) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO booking (scheduleId, seat, status) VALUES (?, ?, ?)");
+            PreparedStatement statement = connection.prepareInsertStatement("INSERT INTO booking (schedule_id, seat, status) VALUES (?, ?, ?)");
 
             statement.setInt(1, booking.getScheduleId());
             statement.setString(2, booking.getSeat());
@@ -108,12 +108,12 @@ public class BookingDAO {
     }
 
     private static Booking getBookingFromResultSet(ResultSet resultSet) throws SQLException {
-        Booking hall = new Booking();
-        hall.setBookingId(resultSet.getInt("hall_id"));
-        hall.setScheduleId(resultSet.getInt("name"));
-        hall.setSeat(resultSet.getString("type"));
-        hall.setAddedDatetime(resultSet.getTimestamp("hall_rows").toLocalDateTime());
-        hall.setStatus(Booking.BookingStatus.getBookingStatusByNumber(resultSet.getInt("seat_per_row")));
-        return hall;
+        Booking booking = new Booking();
+        booking.setBookingId(resultSet.getInt("booking_id"));
+        booking.setScheduleId(resultSet.getInt("schedule_id"));
+        booking.setSeat(resultSet.getString("seat"));
+        booking.setAddedDatetime(resultSet.getTimestamp("added_datetime").toLocalDateTime());
+        booking.setStatus(Booking.BookingStatus.getBookingStatusByNumber(resultSet.getInt("status")));
+        return booking;
     }
 }
