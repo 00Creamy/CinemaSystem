@@ -98,13 +98,13 @@ public class ScheduleDAO {
 
     public static boolean updateSchedule(DBConnection connection, Schedule schedule) throws CinemaException {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE schedule SET movie_id=?, hall_id=?, start_datetime=?, end_datetime=?, deleted=? WHERE hall_id=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE schedule SET movie_id=?, hall_id=?, start_datetime=?, end_datetime=?, deleted=? WHERE schedule_id=?");
             statement.setInt(1, schedule.getMovieId());
             statement.setInt(2, schedule.getHallId());
             statement.setTimestamp(3, Timestamp.valueOf(schedule.getStartDatetime()));
             statement.setTimestamp(4, Timestamp.valueOf(schedule.getEndDatetime()));
             statement.setBoolean(5, schedule.isDeleted());
-            statement.setInt(6, schedule.getHallId());
+            statement.setInt(6, schedule.getScheduleId());
 
             int affectedRows = statement.executeUpdate();
             return affectedRows > 0;

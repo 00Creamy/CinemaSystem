@@ -22,10 +22,19 @@
         }
         %>
         <form method="post">
-            Hall Name: <input type="text" name="hallName" required><br>
-            Hall Type: <input type="text" name="hallType" required><br>
-            Rows: <input type="number" name="rows" required><br>
-            Seat Per Row: <input type="number" name="seatPerRow" required><br>
+            <input type="hidden" name="scheduleId" value="<%=request.getParameter("scheduleId")"%>">
+            Seat:
+            <select name="seat">
+                <%
+                for (String seat: seats) {
+                %>
+                <option value="<%=seat%>"><%=seat%></option>
+                <%
+                }
+                %>
+            </select>
+            <br>
+
             <input type="submit" value="Submit">
         </form>
     </div>
