@@ -41,8 +41,8 @@
                     <td><%=halls.get(schedule.getHallId()).getHallName()%></td>
                     <td><%=schedule.getStartDatetime().toString()%></td>
                     <td><%=schedule.getEndDatetime().toString()%></td>
-                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./UpdateSchedule?id=" + hall.getHallId() + "'>Update</a></td>" : ""%>
-                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./DeleteSchedule?id=" + hall.getHallId() + "'>Delete</a></td>" : ""%>
+                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./UpdateSchedule?id=" + schedule.getHallId() + "'>Update</a></td>" : ""%>
+                    <%=(user.getAccessLevel().getLevel() >= 2) ? "<td><a href='./DeleteSchedule?id=" + schedule.getHallId() + "'>Delete</a></td>" : ""%>
                 </tr>
                 <%
                 }

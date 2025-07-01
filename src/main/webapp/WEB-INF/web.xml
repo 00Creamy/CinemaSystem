@@ -79,6 +79,10 @@
         <servlet-name>SchedulesDelete</servlet-name>
         <servlet-class>com.creamy.cinema.servlet.SchedulesDelete</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.creamy.cinema.servlet.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
         <url-pattern>/Homepage</url-pattern>
@@ -150,6 +154,10 @@
     <servlet-mapping>
         <servlet-name>SchedulesDelete</servlet-name>
         <url-pattern>/DeleteSchedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
 
     <session-config>

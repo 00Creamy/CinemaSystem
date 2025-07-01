@@ -4,18 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link href="loginstyle.css" rel="stylesheet">
 </head>
 <body>
-    <%
-    String error = (String) request.getAttribute("error");
-    if (error != null) {
-        out.println("<p>" + error + "</p>");
-    }
-    %>
-    <form method="post">
-        Username: <input type="text" name="username"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="left">
+        <div>HELLO!!!</div>
+    </div>
+    <div class="right">
+        <%
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+        %>
+            <p class="error"><%= error %></p>
+        <%
+        }
+        %>
+        <form method="post">
+            <label>Username:</label>
+            <input type="text" name="username"><br>
+            <label>Password:</label>
+            <input type="password" name="password"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 </body>
 </html>

@@ -9,5 +9,6 @@ User user = (User) session.getAttribute("user");
         <li><a href="./Movies">Movies</a></li>
         <li><a href="./Schedules">Schedules</a></li>
         <li><a href="./Bookings">Bookings</a></li>
+        <li><a href="./Logout">Logout</a></li>
     </ul>
 </div>
